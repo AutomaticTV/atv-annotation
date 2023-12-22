@@ -1,0 +1,58 @@
+version: '2.3'
+services:
+
+  backend:
+    image: backend_annotation
+    build:
+      context: ./backend
+    container_name: backend
+    networks:
+      static:
+        ipv4_address: 172.19.0.4
+    ports:
+      - 5000:5000/tcp
+    volumes:
+      - /media/corpus:/corpus
+      - /media/uploads:/uploads
+    environment:
+      - SERVER_PORT=5000
+      - MONGO_URL=mongodb://mongo:27017
+      - CORPUS_FOLDER=/corpus
+      - UPLOADS_FOLDER=/uploads
+    runtime: nvidia
+
+  frontend:
+    image: frontend_annotation
+    build: 
+      context: ./frontend
+      args:
+        - VUE_APP_BACKEND_URL=http://localhost:5000
+    container_name: frontend
+    networks:
+      static:
+        ipv4_address: 172.19.0.3
+    ports:
+      - 80:80/tcp
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    networks:
+      static:
+        ipv4_address: 172.19.0.5
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+
+volumes:
+  mongodb:
+
+networks:
+  static:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.19.0.0/24

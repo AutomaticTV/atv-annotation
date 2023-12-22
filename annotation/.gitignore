@@ -1,0 +1,4 @@
+# Ignore compiled fversion
+dist/
+**/__pycache__
+.tmp/*
