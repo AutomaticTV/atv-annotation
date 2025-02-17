@@ -1,3 +1,10 @@
+# ATV Annotation Repository
+
+![](./doc/img/logo_gaevia.png)
+
+This repository is part of **GAEVIA**, a project funded by European Next Generation recovery funds aimed at research Artificial Intelligence-based solutions that enable the automatic generation of statistics, video clips, and highlights to enhance the performance of semi-professional and amateur sports teams.
+
+
 # Annotation Ecosystem
 
 The annotation job manager is an ecosystem of application that allow to automatize all the pipeline annotation. The ecosystem are composed by:
